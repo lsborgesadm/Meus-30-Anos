@@ -316,6 +316,35 @@
       object-fit: cover;
     }
 
+    /* Controle de Áudio (Player Vintage) */
+    .audio-control {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      z-index: 999;
+    }
+
+    .btn-audio {
+      background: var(--bg-card);
+      color: var(--accent-gold);
+      border: 2px solid var(--accent-gold);
+      padding: 0.6rem 1rem;
+      border-radius: 20px;
+      font-family: var(--font-title);
+      font-size: 0.75rem;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s ease;
+    }
+
+    .btn-audio:hover {
+      background: var(--accent-gold);
+      color: var(--bg-dark);
+    }
+
     /* Footer */
     footer {
       text-align: center;
@@ -330,6 +359,8 @@
       .hero h1 { font-size: 2rem; }
       .nav-links { display: none; }
       .anime-mascot { width: 85px; height: 85px; bottom: 15px; right: 15px; }
+      .audio-control { bottom: 15px; left: 15px; }
+      .btn-audio { padding: 0.5rem 0.8rem; font-size: 0.65rem; }
     }
   </style>
 </head>
@@ -430,10 +461,15 @@
     <img src="avatar.jpg" alt="Leandro Avatar Anime">
   </div>
 
-  <!-- ELEMENTO DE ÁUDIO OCULTO -->
-  <audio id="bgMusic" loop autoplay preload="auto">
-    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73180.mp3" type="audio/mpeg">
-  </audio>
+  <!-- PLAYER DE ÁUDIO VINTAGE (CANTO ESQUERDO) -->
+  <div class="audio-control">
+    <button class="btn-audio" id="audioBtn" onclick="toggleAudio()">
+      🔊 MÚSICA: OFF
+    </button>
+    <audio id="bgMusic" loop>
+      <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73180.mp3" type="audio/mpeg">
+    </audio>
+  </div>
 
   <!-- FOOTER -->
   <footer>
@@ -459,29 +495,23 @@
       });
     }
 
-    /* Reprodução Automática do Áudio ao Interagir */
-    document.addEventListener("DOMContentLoaded", function() {
+    /* Função de Tocar/Pausar a Música Vintage */
+    function toggleAudio() {
       const audio = document.getElementById('bgMusic');
+      const btn = document.getElementById('audioBtn');
       
-      // Tenta tocar imediatamente
-      let playPromise = audio.play();
-      
-      if (playPromise !== undefined) {
-        playPromise.catch(error => {
-          // Caso o navegador bloqueie o autoplay, toca no primeiro clique ou toque na tela
-          const startAudio = function() {
-            audio.play();
-            document.removeEventListener('click', startAudio);
-            document.removeEventListener('touchstart', startAudio);
-            document.removeEventListener('scroll', startAudio);
-          };
-
-          document.addEventListener('click', startAudio);
-          document.addEventListener('touchstart', startAudio);
-          document.addEventListener('scroll', startAudio);
-        });
+      if (audio.paused) {
+        audio.play();
+        btn.innerHTML = "🎶 MÚSICA: ON";
+        btn.style.borderColor = "var(--accent-neon)";
+        btn.style.color = "var(--accent-neon)";
+      } else {
+        audio.pause();
+        btn.innerHTML = "🔊 MÚSICA: OFF";
+        btn.style.borderColor = "var(--accent-gold)";
+        btn.style.color = "var(--accent-gold)";
       }
-    });
+    }
   </script>
 </body>
 </html>
