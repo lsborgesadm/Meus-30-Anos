@@ -15,12 +15,12 @@
        ========================================== */
     :root {
       --bg-dark: #120e16;
-      --bg-card: #1d1827;
+      --bg-card: rgba(29, 24, 39, 0.88); /* Transparência para ver o fundo */
       --accent-red: #e63946;
       --accent-gold: #f4a261;
       --accent-neon: #a855f7;
       --text-light: #f1f5f9;
-      --text-muted: #94a3b8;
+      --text-muted: #cbd5e1;
       --font-title: 'Bungee', cursive;
       --font-body: 'Poppins', sans-serif;
     }
@@ -33,6 +33,14 @@
 
     body {
       background-color: var(--bg-dark);
+      /* PLANO DE FUNDO COM O AVATAR */
+      background-image: 
+        linear-gradient(to bottom, rgba(18, 14, 22, 0.85), rgba(18, 14, 22, 0.92)),
+        url('avatar.jpg');
+      background-size: cover;
+      background-position: center top;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
       color: var(--text-light);
       font-family: var(--font-body);
       line-height: 1.6;
@@ -44,7 +52,7 @@
       position: fixed;
       top: 0;
       width: 100%;
-      background: rgba(18, 14, 22, 0.9);
+      background: rgba(18, 14, 22, 0.95);
       backdrop-filter: blur(10px);
       z-index: 1000;
       border-bottom: 2px solid var(--accent-red);
@@ -93,7 +101,6 @@
       align-items: center;
       text-align: center;
       padding: 6rem 1.5rem 2rem;
-      background: radial-gradient(circle at center, rgba(168, 85, 247, 0.15) 0%, rgba(18, 14, 22, 1) 70%);
     }
 
     .badge {
@@ -187,7 +194,7 @@
       position: absolute;
       left: -2.85rem;
       top: 0;
-      background: var(--bg-card);
+      background: var(--bg-dark);
       border: 2px solid var(--accent-neon);
       border-radius: 50%;
       width: 32px;
@@ -200,9 +207,10 @@
 
     .timeline-card {
       background: var(--bg-card);
+      backdrop-filter: blur(8px);
       padding: 1.5rem;
       border-radius: 8px;
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .timeline-card h3 {
@@ -215,6 +223,7 @@
     /* Local do Evento */
     .location-card {
       background: var(--bg-card);
+      backdrop-filter: blur(8px);
       padding: 2.5rem;
       border-radius: 12px;
       text-align: center;
@@ -229,6 +238,7 @@
     /* Sugestões de Presentes (PIX) */
     .pix-card {
       background: var(--bg-card);
+      backdrop-filter: blur(8px);
       padding: 2.5rem;
       border-radius: 12px;
       text-align: center;
@@ -254,7 +264,7 @@
     }
 
     .pix-key-box {
-      background: var(--bg-dark);
+      background: rgba(18, 14, 22, 0.9);
       padding: 0.8rem 1rem;
       border-radius: 6px;
       display: flex;
@@ -351,6 +361,7 @@
       padding: 3rem 1.5rem;
       color: var(--text-muted);
       font-size: 0.85rem;
+      background: rgba(18, 14, 22, 0.95);
       border-top: 1px solid rgba(255, 255, 255, 0.05);
     }
 
