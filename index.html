@@ -246,9 +246,11 @@
     }
 
     .qr-frame img {
-      width: 200px;
-      height: 200px;
+      width: 250px;
+      height: 250px;
+      object-fit: contain;
       display: block;
+      margin: 0 auto;
     }
 
     .pix-key-box {
@@ -288,15 +290,7 @@
       background: var(--accent-red);
     }
 
-    /* Footer */
-    footer {
-      text-align: center;
-      padding: 3rem 1.5rem;
-      color: var(--text-muted);
-      font-size: 0.85rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-    }
-/* Mascot / Avatar no Canto Inferior Direito */
+    /* Mascot / Avatar no Canto Inferior Direito */
     .anime-mascot {
       position: fixed;
       bottom: 20px;
@@ -322,38 +316,20 @@
       object-fit: cover;
     }
 
-    /* Controle de Áudio (Player Vintage) */
-    .audio-control {
-      position: fixed;
-      bottom: 20px;
-      left: 20px;
-      z-index: 999;
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 3rem 1.5rem;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
     }
 
-    .btn-audio {
-      background: var(--bg-card);
-      color: var(--accent-gold);
-      border: 2px solid var(--accent-gold);
-      padding: 0.6rem 1rem;
-      border-radius: 20px;
-      font-family: var(--font-title);
-      font-size: 0.75rem;
-      cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      transition: all 0.2s ease;
-    }
-
-    .btn-audio:hover {
-      background: var(--accent-gold);
-      color: var(--bg-dark);
-    }
     /* Responsividade Celular */
     @media (max-width: 768px) {
       .hero h1 { font-size: 2rem; }
-      .nav-links { display: none; } /* Pode ser adaptado para menu hambúrguer */
+      .nav-links { display: none; }
+      .anime-mascot { width: 85px; height: 85px; bottom: 15px; right: 15px; }
     }
   </style>
 </head>
@@ -415,10 +391,10 @@
     <div class="location-card">
       <h3 style="font-family: var(--font-title); color: var(--accent-gold);">Nossa Celebração</h3>
       <div class="location-info">
-        <p><strong>Data:</strong> 09/04/2027</p>
-        <p><strong>Horário:</strong> 19h00</p>
+        <p><strong>Data:</strong> [Insira a Data Aqui]</p>
+        <p><strong>Horário:</strong> [Insira o Horário Aqui]</p>
         <p><strong>Local:</strong> Quinta da Boa Vista</p>
-        <p><strong>Endereço:</strong> Parque Quinta da Boa Vista - Imperial de São Cristóvão, Rio de Janeiro</p>
+        <p><strong>Endereço:</strong> Parque Quinta da Boa Vista - Imperial de São Cristóvão, Rio de Janeiro - RJ, 20940-040</p>
       </div>
       <a href="https://maps.app.goo.gl/pFzgjYLbZtDMXBPt6" target="_blank" rel="noopener noreferrer" class="btn">ABRIR NO GOOGLE MAPS</a>
     </div>
@@ -437,57 +413,37 @@
 
       <!-- MOLDURA DO QR CODE LIMPO -->
       <div class="qr-frame">
-        <!-- Salve a imagem recortada que você enviou na mesma pasta com o nome 'qrcode.png' -->
-        <img src="qrcode.png" alt="QR Code PIX Itaú" style="width: 250px; height: 250px; object-fit: contain; display: block; margin: 0 auto;">
+        <img src="qrcode.png" alt="QR Code PIX Itaú">
       </div>
 
       <!-- COPIA E COLA -->
       <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 1rem;">Ou se preferir, copie a chave PIX:</p>
       <div class="pix-key-box">
-        <span id="pixKey" class="pix-key-text">21 95936-5527</span>
+        <span id="pixKey" class="pix-key-text">+5521959365527</span>
         <button onclick="copiarPix()" class="btn-copy" id="btnCopy">Copiar</button>
       </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <!-- Avatar no canto inferior direito -->
+  <!-- AVATAR NO CANTO DIREITO -->
   <div class="anime-mascot">
     <img src="avatar.jpg" alt="Leandro Avatar Anime">
   </div>
 
-  <!-- Player de Áudio Vintage Chiptune (no canto esquerdo) -->
-  <div class="audio-control">
-    <button class="btn-audio" id="audioBtn" onclick="toggleAudio()">
-      🔊 MÚSICA: OFF
-    </button>
-    <audio id="bgMusic" loop>
-      <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73180.mp3" type="audio/mpeg">
-    </audio>
-  </div>
+  <!-- ELEMENTO DE ÁUDIO OCULTO -->
+  <audio id="bgMusic" loop autoplay preload="auto">
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73180.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- FOOTER -->
   <footer>
     <p>Criado para celebrar os 30 anos. Que venham os próximos capítulos! ⚡</p>
   </footer>
 
-  <!-- SCRIPT INTERATIVO DA CHAVE PIX -->
+  <!-- SCRIPTS INTERATIVOS -->
   <script>
+    /* Função de Copiar a Chave PIX */
     function copiarPix() {
-      function toggleAudio() {
-      const audio = document.getElementById('bgMusic');
-      const btn = document.getElementById('audioBtn');
-      
-      if (audio.paused) {
-        audio.play();
-        btn.innerHTML = "🎶 MÚSICA: ON";
-        btn.style.borderColor = "var(--accent-neon)";
-        btn.style.color = "var(--accent-neon)";
-      } else {
-        audio.pause();
-        btn.innerHTML = "🔊 MÚSICA: OFF";
-        btn.style.borderColor = "var(--accent-gold)";
-        btn.style.color = "var(--accent-gold)";
-      }
-    }
       const pixKey = document.getElementById("pixKey").innerText;
       navigator.clipboard.writeText(pixKey).then(() => {
         const btn = document.getElementById("btnCopy");
@@ -502,6 +458,30 @@
         console.error('Erro ao copiar: ', err);
       });
     }
+
+    /* Reprodução Automática do Áudio ao Interagir */
+    document.addEventListener("DOMContentLoaded", function() {
+      const audio = document.getElementById('bgMusic');
+      
+      // Tenta tocar imediatamente
+      let playPromise = audio.play();
+      
+      if (playPromise !== undefined) {
+        playPromise.catch(error => {
+          // Caso o navegador bloqueie o autoplay, toca no primeiro clique ou toque na tela
+          const startAudio = function() {
+            audio.play();
+            document.removeEventListener('click', startAudio);
+            document.removeEventListener('touchstart', startAudio);
+            document.removeEventListener('scroll', startAudio);
+          };
+
+          document.addEventListener('click', startAudio);
+          document.addEventListener('touchstart', startAudio);
+          document.addEventListener('scroll', startAudio);
+        });
+      }
+    });
   </script>
 </body>
 </html>
